@@ -1,11 +1,21 @@
-import logo from './logo.svg';
+import React, { useEffect, Fragment } from 'react';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import Home from './Pages/Home/Home';
+import Layout from './Pages/Layout/Layout';
+
+
 import './App.css';
+
 
 function App() {
   return (
-    <div className="App">
-     <h1>Test Warehouse</h1> 
-    </div>
+    <Router>
+      <Routes>
+        <Route path='/' element={ <Layout /> } className='App' >
+          <Route index element={ <Home /> } />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 
