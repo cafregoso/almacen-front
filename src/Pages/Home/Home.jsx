@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Axios from "axios";
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, Button, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 
 import "./Home.css";
@@ -8,12 +8,12 @@ import "./Home.css";
 export default function Home() {
   const [products, setProducts] = useState([]);
   const [locations, setLocations] = useState([]);
-  const [record, setRecord] = useState({
+  const record = {
       "location": null,
       "product": null,
       "bills": null,
       "qtty": null
-  })
+  }
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -48,77 +48,96 @@ export default function Home() {
   }, [setLocations]);
 
     const handleProductChange = (e) => {
-        // setRecord.product = e.target.value
-        console.log(e.target)
+
+      const findProduct = (product) => {
+        return product.code === e.target.textContent
+      }
+
+      record.product = products.find(findProduct).id
+      console.log(record);
     }
 
     const handleLocationChange = (e) => {
-        setRecord.location = e.target.value
+        record.location = e.target.value
     }
 
     const handleOrderChange = (e) => {
-        setRecord.bills = e.target.value
+        record.bills = e.target.value
     }
 
     const handleQttyChange = (e) => {
-        setRecord.qtty = e.target.value
+        record.qtty = e.target.value
     }
 
   return (
-    <div className="containerHome">
-      <div className="homeProduct">
-        <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={products}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Producto" />}
-          getOptionLabel={(option) => option.name}
-          onChange={ handleProductChange }
-        />
-      </div>
-      <div className="homeLocation">
-        <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={locations}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Ubicacion" />}
-          getOptionLabel={(option) => option.location}
-        />
-      </div>
-      <div className="homeOrder">
-        <Box
-          component="form"
-          sx={{
-            "& .MuiTextField-root": { m: 1, width: "25ch" },
-          }}
-          Validate
-          autoComplete="off"
-        >
-          <TextField required id="outlined-required" label="Orden de Compra" />
-        </Box>
-      </div>
-      <div className="homeQtty">
-        <Box
-          component="form"
-          sx={{
-            "& .MuiTextField-root": { m: 1, width: "25ch" },
-          }}
-          Validate
-          autoComplete="off"
-        >
-          <TextField
-            required
-            id="outlined-number"
-            label="Cantidad"
-            type="number"
-            InputLabelProps={{
-              shrink: true,
-            }}
+    <Fragment>
+      <div className="containerHome">
+        <div className="homeProduct">
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={products}
+            sx={{ width: 300 }}
+            renderInput={(params) => <TextField {...params} label="Producto" />}
+            getOptionLabel={(option) => option.code}
+            loading={true}
+            onChange={ handleProductChange }
+            style={{ width: "222px", marginBottom: "10px" }}
+            />
+        </div>
+        <div className="homeLocation">
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={locations}
+            sx={{ width: 300 }}
+            renderInput={(params) => <TextField {...params} label="Ubicacion" />}
+            getOptionLabel={(option) => option.location}
+            loading={true}
+            style={{ width: "222px" }}
           />
-        </Box>
+        </div>
+        <div className="homeOrder">
+          <Box
+            component="form"
+            sx={{
+              "& .MuiTextField-root": { m: 1, width: "25ch" },
+            }}
+            Validate
+            autoComplete="off"
+          >
+            <TextField required id="outlined-required" label="Orden de Compra" />
+          </Box>
+        </div>
+        <div className="homeQtty">
+          <Box
+            component="form"
+            sx={{
+              "& .MuiTextField-root": { m: 1, width: "25ch" },
+            }}
+            Validate
+            autoComplete="off"
+          >
+            <TextField
+              required
+              id="outlined-number"
+              label="Cantidad"
+              type="number"
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </Box>
+        </div>
+        <div>
+          <Button
+            color="primary"
+            variant="contained"
+          >
+            Guardar
+          </Button>
+        </div>
       </div>
-    </div>
+    </Fragment>
   );
 }
