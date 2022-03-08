@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import Axios from "axios";
-import { Autocomplete, Button, TextField } from "@mui/material";
+import { Autocomplete, Button, Link, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 
 import "./Home.css";
@@ -48,30 +48,50 @@ export default function Home() {
   }, [setLocations]);
 
     const handleProductChange = (e) => {
-
       const findProduct = (product) => {
         return product.code === e.target.textContent
       }
 
       record.product = products.find(findProduct).id
-      console.log(record);
     }
 
     const handleLocationChange = (e) => {
-        record.location = e.target.value
-    }
+        const findLocation = (location) => {
+            return location.location === e.target.textContent
+        }
+
+        record.location = locations.find(findLocation).id
+}
 
     const handleOrderChange = (e) => {
         record.bills = e.target.value
     }
 
     const handleQttyChange = (e) => {
-        record.qtty = e.target.value
+        if (e.target.value < 0){
+            alert('Debes ingresar una cantidad Valida!')
+        }
+        else{
+            record.qtty = e.target.value
+        }
+    }
+
+    const handleCreateRecord = () => {
+        Axios.post('http://127.0.0.1:8000/create-register/', {
+            location: record.location,
+            product: record.product,
+            bills: record.bills,
+            qtty: record.qtty
+          })
+          .catch(error => console.log(error))
     }
 
   return (
     <Fragment>
-      <div className="containerHome">
+      <div 
+        className="containerHome"
+        //onSubmit={}
+      >
         <div className="homeProduct">
           <Autocomplete
             disablePortal
@@ -94,6 +114,7 @@ export default function Home() {
             renderInput={(params) => <TextField {...params} label="Ubicacion" />}
             getOptionLabel={(option) => option.location}
             loading={true}
+            onChange={ handleLocationChange }
             style={{ width: "222px" }}
           />
         </div>
@@ -105,6 +126,7 @@ export default function Home() {
             }}
             Validate
             autoComplete="off"
+            onChange={ handleOrderChange }
           >
             <TextField required id="outlined-required" label="Orden de Compra" />
           </Box>
@@ -117,6 +139,7 @@ export default function Home() {
             }}
             Validate
             autoComplete="off"
+            onChange={ handleQttyChange }
           >
             <TextField
               required
@@ -133,6 +156,8 @@ export default function Home() {
           <Button
             color="primary"
             variant="contained"
+            onClick={ handleCreateRecord }
+            component={ Link }
           >
             Guardar
           </Button>
