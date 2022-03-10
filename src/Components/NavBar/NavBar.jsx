@@ -63,7 +63,7 @@ const NavBar = () => {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Ver Registros</Typography>
+                <Typography textAlign="center"><Link to='/records'>Ver Registros</Link></Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">Crear Producto</Typography>
@@ -77,6 +77,8 @@ const NavBar = () => {
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
+                component={ Link }
+                to='/records'
               >
                 Ver Registros
               </Button>
