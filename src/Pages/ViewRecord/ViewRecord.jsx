@@ -26,7 +26,7 @@ export default function ViewRecord() {
         const fetchRecords = async () => {
             try {
                 const response = await Axios({
-                    url: "http://127.0.0.1:8000/",
+                    url: "http://127.0.0.1:8001/",
                 });
 
                 setRecords(response.data);
@@ -42,7 +42,7 @@ export default function ViewRecord() {
     return (
         <div className='viewRecords'>
         <a 
-            href='http://127.0.0.1:8000/download/'
+            href='http://127.0.0.1:8001/download/'
             style={{ 
               backgroundColor: '#1C76D2',
               color: '#FFF',

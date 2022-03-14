@@ -19,7 +19,7 @@ export default function Home() {
     const fetchProducts = async () => {
       try {
         const response = await Axios({
-          url: "http://127.0.0.1:8000/products/",
+          url: "http://127.0.0.1:8001/products/",
         });
 
         setProducts(response.data);
@@ -35,7 +35,7 @@ export default function Home() {
     const fetchLocations = async () => {
       try {
         const response = await Axios({
-          url: "http://127.0.0.1:8000/locations/",
+          url: "http://127.0.0.1:8001/locations/",
         });
 
         setLocations(response.data);
@@ -68,16 +68,11 @@ export default function Home() {
     }
 
     const handleQttyChange = (e) => {
-        if (e.target.value < 0){
-            alert('Debes ingresar una cantidad Valida!')
-        }
-        else{
-            record.qtty = e.target.value
-        }
+        record.qtty = e.target.value
     }
 
     const handleCreateRecord = () => {
-        Axios.post('http://127.0.0.1:8000/create-register/', {
+        Axios.post('http://127.0.0.1:8001/create-register/', {
             location: record.location,
             product: record.product,
             bills: record.bills,

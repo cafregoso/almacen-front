@@ -62,10 +62,10 @@ const NavBar = () => {
                 <Typography textAlign="center"><Link to='/records'>Ver Registros</Link></Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Crear Producto</Typography>
+                <Typography textAlign="center"><Link to='/product'>Crear Producto</Link></Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Crear Ubicacion</Typography>
+                <Typography textAlign="center"><Link to='/location'>Crear Ubicacion</Link></Typography>
               </MenuItem>
             </Menu>
           </Box>
@@ -89,12 +89,16 @@ const NavBar = () => {
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
+                component={ Link }
+                to='/product'
               >
                 Crear Producto
               </Button>
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
+                component={ Link }
+                to='/location'
               >
                 Crear Ubicacion
               </Button>
