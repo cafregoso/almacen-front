@@ -26,13 +26,6 @@ const NavBar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters> 
-          <Link
-            style={{ color: '#FFF', textDecoration: 'none' }}
-            to='/'
-          >
-            ALMACEN
-          </Link>
-
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -63,6 +56,9 @@ const NavBar = () => {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
+                <Typography textAlign="center"><Link to='/'>Inicio</Link></Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center"><Link to='/records'>Ver Registros</Link></Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
@@ -74,6 +70,14 @@ const NavBar = () => {
             </Menu>
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+                component={ Link }
+                to='/'
+              >
+                Inicio
+              </Button>
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}

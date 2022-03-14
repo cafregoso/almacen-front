@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import Axios from "axios";
-import { Autocomplete, Button, Link, TextField } from "@mui/material";
+import { Autocomplete, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 
 import "./Home.css";
@@ -88,10 +88,7 @@ export default function Home() {
 
   return (
     <Fragment>
-      <div 
-        className="containerHome"
-        //onSubmit={}
-      >
+      <form className="containerHome">
         <div className="homeProduct">
           <Autocomplete
             disablePortal
@@ -120,7 +117,6 @@ export default function Home() {
         </div>
         <div className="homeOrder">
           <Box
-            component="form"
             sx={{
               "& .MuiTextField-root": { m: 1, width: "25ch" },
             }}
@@ -133,7 +129,6 @@ export default function Home() {
         </div>
         <div className="homeQtty">
           <Box
-            component="form"
             sx={{
               "& .MuiTextField-root": { m: 1, width: "25ch" },
             }}
@@ -153,16 +148,30 @@ export default function Home() {
           </Box>
         </div>
         <div>
-          <Button
+          {/* <Button
             color="primary"
             variant="contained"
             onClick={ handleCreateRecord }
             component={ Link }
           >
             Guardar
-          </Button>
+          </Button> */}
+          <input 
+            type='submit' 
+            value='Guardar'
+            onClick={ handleCreateRecord }
+            style={{ 
+              backgroundColor: '#1C76D2',
+              color: '#FFF',
+              border:'none',
+              padding: '10px 20px',
+              borderRadius: '5px',
+              fontSize: '1rem',
+              cursor: 'pointer',
+            }}
+          />
         </div>
-      </div>
+      </form>
     </Fragment>
   );
 }
